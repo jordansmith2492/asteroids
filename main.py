@@ -5,6 +5,7 @@ from player import Player  # Import the Player class from the player module
 from asteroid import Asteroid  # Import the Asteroid class from the asteroid module
 from asteroidfield import AsteroidField  # Import the AsteroidField class from the asteroidfield module
 from shot import Shot  # Import the Shot class from the shot module
+from keepscore import KeepScore  # Import the KeepScore class from the keepscore module
 
 def main():
     pygame.init()  # Initialize all imported pygame modules
@@ -29,6 +30,7 @@ def main():
 
     player = Player(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2) # Create a player object at the center of the screen
     asteroid_field = AsteroidField() # Create an asteroid field object
+    score = KeepScore() # Create a score object
 
 
     while True: # Main game loop
@@ -40,12 +42,14 @@ def main():
         updatable_group.update(dt) # Update all updatable objects
         for drawable in drawable_group: # Draw all drawable objects
             drawable.draw(screen)
+            score.draw(screen) # Draw the score
         for asteroid in asteroid_group:
             for shot in shot_group:
                 if shot.detect_collision(asteroid): # Check for collision between shots and asteroids
                     asteroid.split() # Remove the asteroid if it is hit
                     asteroid.kill() # Remove the asteroid from the group
                     shot.kill()
+                    score.add_score(1)
             if player.detect_collision(asteroid):
                 print("Game over!") # Check for collision between player and asteroids
                 pygame.quit()

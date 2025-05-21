@@ -1,5 +1,5 @@
-SCREEN_WIDTH = 1280 # width of the screen
-SCREEN_HEIGHT = 720 # height of the screen
+SCREEN_WIDTH = 1440 # width of the screen
+SCREEN_HEIGHT = 810 # height of the screen
 
 ASTEROID_MIN_RADIUS = 20 # minimum radius of asteroids
 ASTEROID_KINDS = 3 # number of different kinds of asteroids
