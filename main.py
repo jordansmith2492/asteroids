@@ -41,6 +41,11 @@ def main():
         for drawable in drawable_group: # Draw all drawable objects
             drawable.draw(screen)
         for asteroid in asteroid_group:
+            for shot in shot_group:
+                if shot.detect_collision(asteroid): # Check for collision between shots and asteroids
+                    asteroid.split() # Remove the asteroid if it is hit
+                    asteroid.kill() # Remove the asteroid from the group
+                    shot.kill()
             if player.detect_collision(asteroid):
                 print("Game over!") # Check for collision between player and asteroids
                 pygame.quit()
