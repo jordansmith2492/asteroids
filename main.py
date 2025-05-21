@@ -7,6 +7,8 @@ from constants import *
 
 def main():
     pygame.init()  # Initialize all imported pygame modules
+    clock = pygame.time.Clock()  # Create a clock object to control the frame rate
+    dt = 0  # Initialize delta time
     
     print("Starting Asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
@@ -21,6 +23,8 @@ def main():
         
         pygame.Surface.fill(screen, (0, 0, 0), rect=None)  # Fill the screen with black
         pygame.display.flip()
+        clock.tick(60)  # Control the frame rate to 60 FPS
+        dt = clock.tick(60) / 1000.0
 
 if __name__ == "__main__":
     main()
