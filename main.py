@@ -4,6 +4,7 @@ from circleshape import CircleShape  # Import the CircleShape class from the cir
 from player import Player  # Import the Player class from the player module
 from asteroid import Asteroid  # Import the Asteroid class from the asteroid module
 from asteroidfield import AsteroidField  # Import the AsteroidField class from the asteroidfield module
+from shot import Shot  # Import the Shot class from the shot module
 
 def main():
     pygame.init()  # Initialize all imported pygame modules
@@ -19,13 +20,16 @@ def main():
     updatable_group = pygame.sprite.Group() # Create a group for updatable objects
     drawable_group = pygame.sprite.Group() # Create a group for drawable objects
     asteroid_group = pygame.sprite.Group() # Create a group for asteroids
+    shot_group = pygame.sprite.Group() # Create a group for shots
     
     Player.containers = (updatable_group, drawable_group) # Assign the groups to the Player class
     Asteroid.containers = (asteroid_group, updatable_group, drawable_group) # Assign the groups to the Asteroid class
     AsteroidField.containers = (updatable_group) # Assign the groups to the AsteroidField class
+    Shot.containers = (shot_group, updatable_group, drawable_group) # Assign the groups to the Shot class
 
     player = Player(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2) # Create a player object at the center of the screen
     asteroid_field = AsteroidField() # Create an asteroid field object
+
 
     while True: # Main game loop
         for event in pygame.event.get():
@@ -38,7 +42,7 @@ def main():
             drawable.draw(screen)
         for asteroid in asteroid_group:
             if player.detect_collision(asteroid):
-                print("Collision detected!") # Check for collision between player and asteroids
+                print("Game over!") # Check for collision between player and asteroids
                 pygame.quit()
                 return
         pygame.display.flip() # Update the display
