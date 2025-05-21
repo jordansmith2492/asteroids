@@ -1,9 +1,7 @@
-# this allows us to use code from
-# the open-source pygame library
-# throughout this file
-import pygame
-from constants import * 
-
+import pygame # Import the pygame library
+from constants import * # Import all constants from the constants module
+from circleshape import CircleShape  # Import the CircleShape class from the circleshape module
+from player import Player  # Import the Player class from the player module
 
 def main():
     pygame.init()  # Initialize all imported pygame modules
@@ -14,17 +12,21 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
 
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))  # Set the screen size
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) # Set the screen size
 
-    while True:
+    player = Player(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2) # Create a player object at the center of the screen
+
+    while True: # Main game loop
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT: # Check for quit event
                 return
         
-        pygame.Surface.fill(screen, (0, 0, 0), rect=None)  # Fill the screen with black
-        pygame.display.flip()
-        clock.tick(60)  # Control the frame rate to 60 FPS
-        dt = clock.tick(60) / 1000.0
+        screen.fill((0, 0, 0)) # Fill the screen with black
+        player.update(dt) # Update the player
+        player.draw(screen) # Draw the player on the screen
+        pygame.display.flip() # Update the display
+        clock.tick(60) # Control the frame rate to 60 FPS
+        dt = clock.tick(60) / 1000.0 # Calculate delta time
 
 if __name__ == "__main__":
     main()
