@@ -14,6 +14,10 @@ def main():
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) # Set the screen size
 
+    updatable_group = pygame.sprite.Group() # Create a group for updatable objects
+    drawable_group = pygame.sprite.Group() # Create a group for drawable objects
+    Player.containers = (updatable_group, drawable_group) # Assign the groups to the Player class
+
     player = Player(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2) # Create a player object at the center of the screen
 
     while True: # Main game loop
@@ -22,8 +26,9 @@ def main():
                 return
         
         screen.fill((0, 0, 0)) # Fill the screen with black
-        player.update(dt) # Update the player
-        player.draw(screen) # Draw the player on the screen
+        updatable_group.update(dt) # Update all updatable objects
+        for drawable in drawable_group: # Draw all drawable objects
+            drawable.draw(screen)
         pygame.display.flip() # Update the display
         clock.tick(60) # Control the frame rate to 60 FPS
         dt = clock.tick(60) / 1000.0 # Calculate delta time
