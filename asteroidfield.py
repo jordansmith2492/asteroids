@@ -1,7 +1,7 @@
-import pygame
-import random
-from asteroid import Asteroid
-from constants import *
+import pygame # Import the pygame library
+import random # Import the random library for generating random numbers
+from asteroid import Asteroid # Import the Asteroid class from the asteroid module
+from constants import * # Import all constants from the constants module
 
 
 class AsteroidField(pygame.sprite.Sprite):

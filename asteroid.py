@@ -13,15 +13,14 @@ class Asteroid(CircleShape):
 	def update(self, dt):
 		self.position += self.velocity * dt
 
-	def split(self):
-		# Split the asteroid into two smaller asteroids
-		if self.radius <= ASTEROID_MIN_RADIUS:
-			self.kill()
+	def split(self): 
+		if self.radius <= ASTEROID_MIN_RADIUS: 
+			self.kill() 
 			return
 		random_angle = random.uniform(20, 50)
 
-		direction1 = self.velocity.rotate(random_angle) * 1.2
-		direction2 = self.velocity.rotate(-random_angle) * 1.2
+		direction1 = self.velocity.rotate(random_angle) * 1.5
+		direction2 = self.velocity.rotate(-random_angle) * 1.5
 
 		new_radius = self.radius - ASTEROID_MIN_RADIUS
 
