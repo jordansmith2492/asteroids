@@ -18,8 +18,6 @@ def main():
     dt = 0  # Initialize delta time
     
     print("Starting Asteroids!")
-    print(f"Screen width: {SCREEN_WIDTH}")
-    print(f"Screen height: {SCREEN_HEIGHT}")
 
     updatable_group = pygame.sprite.Group() # Create a group for updatable objects
     drawable_group = pygame.sprite.Group() # Create a group for drawable objects
@@ -49,12 +47,16 @@ def main():
         for asteroid in asteroid_group:
             for shot in shot_group:
                 if shot.detect_collision(asteroid): # Check for collision between shots and asteroids
-                    asteroid.split() # Remove the asteroid if it is hit
+                    new_asteroids = asteroid.split() # Remove the asteroid if it is hit
+                    if new_asteroids:
+                        for new in new_asteroids:
+                            new.add(*Asteroid.containers)
                     asteroid.kill() # Remove the asteroid from the group
                     shot.kill()
                     score.add_score(1)
             if player.detect_collision(asteroid):
                 print("Game over!") # Check for collision between player and asteroids
+                print(f"Score: {score.score}")
                 pygame.quit()
                 return
         pygame.display.flip() # Update the display

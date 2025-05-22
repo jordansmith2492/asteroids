@@ -27,6 +27,8 @@ class Asteroid(CircleShape, pygame.sprite.Sprite):
 
 		asteroid1 = Asteroid(self.position.x, self.position.y, new_radius)
 		asteroid1.velocity = direction1
+		asteroid1.add(*Asteroid.containers)
 		asteroid2 = Asteroid(self.position.x, self.position.y, new_radius)
 		asteroid2.velocity = direction2
-		return [asteroid1, asteroid2]
+		asteroid2.add(*Asteroid.containers)
+		self.kill()

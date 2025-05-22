@@ -43,7 +43,8 @@ class TitleScreen:
             self.bg_asteroids.update(dt)
 
             for asteroid in self.bg_asteroids:
-                asteroid.draw(self.screen)
+                if isinstance(asteroid, Asteroid):
+                    asteroid.draw(self.screen)
 
             title = self.font_large.render("Asteroids", True, (255, 255, 255))
             prompt = self.font_small.render("Press Enter to Start", True, (255, 255, 255))
