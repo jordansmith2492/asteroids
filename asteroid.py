@@ -3,9 +3,10 @@ import random # Import the random library for generating random numbers
 from constants import *  # Import all constants from the constants module
 from circleshape import CircleShape  # Import the CircleShape class from the circleshape module
 
-class Asteroid(CircleShape):
+class Asteroid(CircleShape, pygame.sprite.Sprite):
 	def __init__(self, x, y, radius):
-		super().__init__(x, y, radius)
+		pygame.sprite.Sprite.__init__(self, *self.containers)
+		CircleShape.__init__(self, x, y, radius)
 
 	def draw(self, screen):
 		pygame.draw.circle(screen, (255, 255, 255), (int(self.position.x), int(self.position.y)), self.radius, width=2)

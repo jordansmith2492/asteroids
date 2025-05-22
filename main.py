@@ -6,17 +6,20 @@ from asteroid import Asteroid  # Import the Asteroid class from the asteroid mod
 from asteroidfield import AsteroidField  # Import the AsteroidField class from the asteroidfield module
 from shot import Shot  # Import the Shot class from the shot module
 from keepscore import KeepScore  # Import the KeepScore class from the keepscore module
+from titlescreen import TitleScreen  # Import the TitleScreen class from the titlescreen module
 
 def main():
     pygame.init()  # Initialize all imported pygame modules
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) # Set the screen size
+    title = TitleScreen(screen)
+    title.run()
+    
     clock = pygame.time.Clock()  # Create a clock object to control the frame rate
     dt = 0  # Initialize delta time
     
     print("Starting Asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
-
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) # Set the screen size
 
     updatable_group = pygame.sprite.Group() # Create a group for updatable objects
     drawable_group = pygame.sprite.Group() # Create a group for drawable objects
@@ -25,7 +28,7 @@ def main():
     
     Player.containers = (updatable_group, drawable_group) # Assign the groups to the Player class
     Asteroid.containers = (asteroid_group, updatable_group, drawable_group) # Assign the groups to the Asteroid class
-    AsteroidField.containers = (updatable_group) # Assign the groups to the AsteroidField class
+    AsteroidField.containers = (updatable_group,) # Assign the groups to the AsteroidField class
     Shot.containers = (shot_group, updatable_group, drawable_group) # Assign the groups to the Shot class
 
     player = Player(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2) # Create a player object at the center of the screen
