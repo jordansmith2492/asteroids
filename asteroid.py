@@ -20,8 +20,8 @@ class Asteroid(CircleShape, pygame.sprite.Sprite):
 			return
 		random_angle = random.uniform(20, 50)
 
-		direction1 = self.velocity.rotate(random_angle) * 1.5
-		direction2 = self.velocity.rotate(-random_angle) * 1.5
+		direction1 = self.velocity.rotate(random_angle) * 2.0
+		direction2 = self.velocity.rotate(-random_angle) * 2.0
 
 		new_radius = self.radius - ASTEROID_MIN_RADIUS
 
